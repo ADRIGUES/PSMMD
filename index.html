@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paróquia Santa Maria Mãe de Deus | Parceria pela Dignidade Humana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Teko:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #2c3e50; /* Azul Escuro */
+            --cor-secundaria: #27ae60; /* Verde Esperança */
+            --cor-destaque: #f1c40f; /* Dourado */
+            --cor-fundo: #ecf0f1;
+            --cor-texto: #34495e;
+            --cor-branco: #ffffff;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes backgroundZoom {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+
+        .header {
+            position: relative;
+            overflow: hidden; /* Garante que a imagem ampliada não ultrapasse o cabeçalho */
+            color: var(--cor-branco);
+            padding: 80px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh; /* Aumenta a altura do cabeçalho */
+        }
+        
+        /* Camada da imagem de fundo com animação */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* NOVA IMAGEM: Mãos ajudando, simbolizando esperança e dignidade. */
+            background-image: url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            animation: backgroundZoom 15s infinite alternate ease-in-out;
+            z-index: -2;
+        }
+
+        /* Camada de gradiente para dar cor e contraste */
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* NOVO GRADIENTE: Usando as cores do tema (verde e azul) para um visual mais vibrante e esperançoso. */
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.85), rgba(44, 62, 80, 0.8));
+            z-index: -1;
+        }
+
+        .header h1 {
+            font-family: 'Teko', sans-serif;
+            margin: 0;
+            font-size: 4.5em; /* Ligeiramente maior */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* Sombra mais sutil */
+            animation: fadeIn 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.4em;
+            max-width: 800px;
+            margin: 15px auto 0;
+            font-weight: 300;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: var(--cor-branco);
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5em;
+            color: var(--cor-primaria);
+            border-bottom: 3px solid var(--cor-secundaria);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 5px solid var(--cor-secundaria);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .project-card h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8em;
+            color: var(--cor-secundaria);
+            margin: 0 0 10px 0;
+        }
+
+        /* Estilo para Acordeão */
+        .accordion details {
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .accordion summary {
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            background-color: #f7f7f7;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            color: var(--cor-primaria);
+        }
+        .accordion summary::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+        .accordion details[open] summary::after {
+            transform: rotate(45deg);
+        }
+        .accordion .content {
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .accordion .content p, .accordion .content li {
+            text-align: justify;
+        }
+        .accordion .content ul {
+            padding-left: 20px;
+        }
+
+        .cta-section {
+            background-color: var(--cor-secundaria);
+            color: var(--cor-branco);
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+         .cta-section h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.8em;
+            color: var(--cor-branco);
+            border: none;
+            margin: 0 0 10px 0;
+        }
+
+        .cta-button {
+            background-color: var(--cor-destaque);
+            color: var(--cor-primaria);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #e1b30d;
+            transform: scale(1.05);
+        }
+        
+        .map-section iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Parceria pela Dignidade Humana</h1>
+        <p>A proposta de credenciamento social da Paróquia Santa Maria Mãe de Deus junto à VEPMA/TJPA</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Seção Introdutória e Projetos -->
+        <div class="section">
+            <h2>Fé em Ação: Nossa Missão no Maguari</h2>
+            <p>Os projetos sociais da Paróquia Santa Maria Mãe de Deus não são meras atividades filantrópicas, mas a concretização de sua identidade eclesial. Eles representam a fé em ação, buscando ativamente reduzir as desigualdades e promover uma inclusão social que restaura a dignidade e a esperança na comunidade do Maguari.</p>
+            <div class="project-grid">
+                <div class="project-card"><h3>Sopão Solidário</h3><p>Distribuição de refeições que aquecem o corpo e a alma.</p></div>
+                <div class="project-card"><h3>Pão em Todas as Mesas</h3><p>Cestas básicas que garantem o alimento para mais de 180 famílias.</p></div>
+                <div class="project-card"><h3>Ação Saúde</h3><p>Atendimentos médicos e odontológicos voluntários para a comunidade.</p></div>
+                <div class="project-card"><h3>Pastoral do Surdo</h3><p>Inclusão e acessibilidade com missas em Libras e cursos.</p></div>
+                <div class="project-card"><h3>Juventude em Foco</h3><p>Aulas de futebol, karatê, música e dança para um futuro com oportunidades.</p></div>
+                <div class="project-card"><h3>Pastoral da Pessoa Idosa</h3><p>Oficinas e atividades que promovem bem-estar e socialização.</p></div>
+            </div>
+        </div>
+
+        <!-- Seção Acordeão com todo o conteúdo -->
+        <div class="section accordion">
+            <h2>Conheça a Proposta em Detalhes</h2>
+            
+            <details>
+                <summary>1. Introdução à Parceria</summary>
+                <div class="content">
+                    <p>Este documento tem como objetivo apresentar ao Pároco e à comissão de direção da Paróquia Santa Maria Mãe de Deus uma oportunidade significativa para fortalecer e expandir o trabalho social que a Paróquia já realiza na comunidade do bairro Maguari, em Ananindeua, e regiões vizinhas. Trata-se da possibilidade de a Paróquia se tornar uma entidade credenciada junto à Vara de Execução das Penas e Medidas Alternativas (VEPMA) do Tribunal de Justiça do Estado do Pará (TJPA), o que permitiria o acesso a recursos financeiros provenientes das prestações pecuniárias, bem como o recebimento de pessoas em cumprimento de Prestação de Serviços à Comunidade (PSC).</p>
+                    <p>A Paróquia Santa Maria Mãe de Deus, atuante desde 2016 no bairro do Maguari, em Ananindeua, um bairro periférico da Região Metropolitana de Belém, tem promovido a dignidade humana, qualidade de vida e oportunidades de inclusão social através de diversas atividades e projetos. A Paróquia desenvolve iniciativas como a distribuição de alimentos (Sopão Solidário, cestas básicas), atenção à saúde, aulas de futebol para crianças e adolescentes, programas para idosos e uma pastoral dedicada a surdos.</p>
+                    <p>O bairro do Maguari, em Ananindeua, concentra uma série de graves problemas sociais que refletem a complexa realidade urbana da Amazônia. A rápida e desordenada expansão populacional, aliada à carência histórica de investimentos em infraestrutura e políticas públicas, resultou em um cenário de vulnerabilidade para seus moradores, demandando respostas concretas de ação social.</p>
+                    <p>Uma parceria formal com o Poder Judiciário, por meio do credenciamento na VEPMA, pode representar um apoio fundamental para a continuidade e o crescimento dessas ações, beneficiando ainda mais a população em situação de vulnerabilidade assistida pela Paróquia e alinhando-se aos critérios de priorização da VEPMA por entidades que prestam serviços de relevante cunho social e que recebem cumpridores de penas alternativas.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>2. A VEPMA e o Processo de Credenciamento</summary>
+                <div class="content">
+                    <p>A Vara de Execução das Penas e Medidas Alternativas (VEPMA) da Comarca da Capital do Tribunal de Justiça do Estado do Pará (TJPA) tem a competência estabelecida pela Lei Estadual nº 6.480/2002 e pelo Provimento nº 03/2007 – CJRMB para a execução de penas não privativas de liberdade na Região Metropolitana de Belém, que inclui Ananindeua.</p>
+                    <p>A VEPMA é a unidade responsável por fiscalizar e acompanhar o cumprimento das penas e medidas alternativas aplicadas pelo Poder Judiciário. Isso inclui as prestações pecuniárias (PP), que consistem no pagamento em dinheiro, e a prestação de serviços à comunidade (PSC), onde o apenado cumpre sua pena realizando atividades não remuneradas em entidades ou programas sociais.</p>
+                    <p>Os recursos arrecadados com as prestações pecuniárias devem ser destinados preferencialmente a entidades públicas ou privadas com finalidade social previamente conveniadas. A receita da conta vinculada deve financiar projetos apresentados por esses beneficiários, priorizando aqueles que mantenham um número expressivo de cumpridores de PSC por mais tempo.</p>
+                    <p>O credenciamento da entidade junto à VEPMA é o procedimento formal que permite à instituição tornar-se uma parceira do Poder Judiciário. É fundamental destacar que, de acordo com o Edital nº 02/2024 da VEPMA, instituições que ainda não recebem cumpridores de PSC ficam impedidas de participar da seleção para financiamento de projetos. Isso sublinha a importância da Paróquia já se disponibilizar a receber pessoas em cumprimento de PSC, o que é um fator de prioridade e elegibilidade para o acesso aos recursos.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>3. Elegibilidade e Benefícios para a Paróquia</summary>
+                <div class="content">
+                    <p>A Paróquia Santa Maria Mãe de Deus desenvolve uma série de projetos de relevante e significativa extensão social, o que se alinha com os critérios de seleção e priorização da VEPMA. As diversas ações demonstram um forte compromisso da Paróquia com a inclusão social e a melhoria da qualidade de vida da população em situação de vulnerabilidade, enquadrando-se no perfil de entidade com finalidade social buscado pela VEPMA.</p>
+                    <h4>Benefícios Possíveis para a Instituição:</h4>
+                    <ul>
+                        <li><strong>Formalização como Parceira do Poder Judiciário:</strong> O credenciamento confere o status oficial de parceira do Tribunal de Justiça, elevando o reconhecimento institucional.</li>
+                        <li><strong>Reconhecimento e Valorização Social:</strong> A parceria valoriza a Paróquia como um importante agente de responsabilidade social na comunidade.</li>
+                        <li><strong>Acesso a Mão de Obra Voluntária (Cumpridores de PSC):</strong> Apoio sem ônus para a execução de seus projetos sociais, que atualmente contam com voluntários.</li>
+                        <li><strong>Acesso Potencial a Recursos Financeiros:</strong> Elegibilidade para apresentar projetos e concorrer a financiamento para suas iniciativas sociais, que hoje dependem principalmente de doações.</li>
+                        <li><strong>Fortalecimento Institucional:</strong> Aprimoramento das práticas administrativas, contábeis e de gestão de projetos da Paróquia.</li>
+                        <li><strong>Colaboração com o Sistema de Justiça:</strong> Contribuição ativa para a ressocialização de indivíduos e para o cumprimento de penas alternativas.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>4. Benefícios para a Comunidade</summary>
+                <div class="content">
+                    <h4>Impactos Diretos e Indiretos na Comunidade:</h4>
+                    <ul>
+                        <li><strong>Ampliação dos Projetos Sociais:</strong> Com mais apoio, a Paróquia pode expandir e aprimorar a qualidade de seus projetos existentes, materializando a missão da Igreja de servir aos mais necessitados.</li>
+                        <li><strong>Melhora da Qualidade de Vida e Inclusão Social:</strong> A parceria potencializa a capacidade de responder às demandas da comunidade, oferecendo mais suporte em áreas como alimentação, saúde e educação.</li>
+                        <li><strong>Ressocialização e Reinserção Social:</strong> Oferece a indivíduos que cumprem pena a oportunidade de resgatarem sua cidadania, contribuindo para sua reinserção e para a redução da marginalização.</li>
+                        <li><strong>Projetos Específicos de Relevância Social:</strong> A Paróquia pode apresentar propostas alinhadas com as prioridades do CNJ e da VEPMA, como apoio a crianças, idosos e pessoas com deficiência.</li>
+                        <li><strong>Atendimento a Populações em Contexto de Vulnerabilidade:</strong> A sinergia com a VEPMA fortalece a capacidade de atender a população do Maguari e áreas próximas que mais necessitam.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>5. Passo a Passo para o Credenciamento</summary>
+                <div class="content">
+                    <p>O processo de credenciamento de entidades é realizado por meio de editais públicos. O <strong>Edital nº 01/2025 - VEPMA</strong>, publicado no Diário da Justiça Eletrônico em 27 de janeiro de 2025, trata explicitamente do cadastramento de entidades que desejem ser parceiras da VEPMA.</p>
+                    <p><strong>O passo prático para a Paróquia é:</strong></p>
+                    <ol>
+                        <li>Redigir uma apresentação da Paróquia Santa Maria Mãe de Deus e suas atividades sociais.</li>
+                        <li>Enviar um e-mail para <strong>administrativos.vepmabelem@tjpa.jus.br</strong>, apresentando a paróquia, informando a disponibilidade em atuar como entidade credenciada e solicitando informações e direcionamento para o processo.</li>
+                    </ol>
+                    <p>É importante notar que o credenciamento é o primeiro passo. Uma vez credenciada, a Paróquia poderá então apresentar projetos em futuros editais para a destinação dos recursos. A instituição torna-se parceira do Poder Judiciário e recebe colaboradores (cumpridores de PSC) sem ônus, o que já é um fator de priorização.</p>
+                </div>
+            </details>
+            
+             <details>
+                <summary>6. Fundamento e Missão: Uma "Igreja em Saída"</summary>
+                <div class="content">
+                    <p>A possibilidade do credenciamento com a VEPMA transcende a dimensão de um mero reconhecimento formal; configura-se como um caminho prático e profético para a Paróquia Santa Maria Mãe de Deus. É a materialização de uma "Igreja em saída", como exorta o Papa Francisco na <em>Evangelii Gaudium</em>, que vai ao encontro das "periferias existenciais" para atuar como um "hospital de campanha". Os recursos (humanos via PSC e financeiros via Projetos) tornam-se os instrumentos que equipam este hospital para curar as feridas sociais do Maguari.</p>
+                    <p>Esta parceria permite transformar a caridade em ações organizadas e eficazes, como ensina o Papa Bento XVI na <em>Deus Caritas Est</em>, superando o assistencialismo para promover o "desenvolvimento humano integral" (<em>Caritas in Veritate</em>). Ao focar na ressocialização, na saúde e na inclusão, a Paróquia não apenas assiste, mas promove a dignidade da pessoa em todas as suas dimensões, combatendo o que o Papa João Paulo II definiu como "estruturas de pecado" e construindo, em seu lugar, autênticas "estruturas de solidariedade" (<em>Sollicitudo Rei Socialis</em>).</p>
+                    <p>Trata-se, portanto, de um exercício concreto da "opção preferencial pelos pobres" (<em>Catecismo da Igreja Católica, 2448</em>), que mobiliza recursos da sociedade para o bem comum. Ao fazê-lo, a Paróquia não só realiza as obras de misericórdia, mas engaja-se no que o Papa Francisco chama de "a melhor política" ou "caridade política" (<em>Fratelli Tutti</em>), aquela que busca o bem de todos e trabalha para restaurar a dignidade dos descartados. Assim, o convênio com a VEPMA torna-se um poderoso instrumento para a Paróquia viver sua fé através de obras, gerando um impacto real e duradouro na promoção da dignidade humana e na melhoria da qualidade de vida no bairro Maguari e em seu entorno.</p>
+                </div>
+            </details>
+
+        </div>
+
+        <!-- Seção Call to Action -->
+        <div class="cta-section">
+            <h2>Faça Parte Desta Transformação!</h2>
+            <p>O primeiro passo é o credenciamento junto à VEPMA. Se o Paróco, gestor da Paróquia, sentir que a Igreja Santa Maria Mãe de Deus deve seguir esse caminho, fortalecendo a sua missão e levando mais dignidade a quem mais precisa no bairro do Maguari, ele deve enviar um e-mail para a VEPMA apresentando a Paróquia Santa Maria Mãe e suas atividades sociais, informando a disponibilidade em atuar como entidade credenciada e solicitando informações e direcionamento para o processo</p>
+             <a href="mailto:administrativos.vepmabelem@tjpa.jus.br?subject=Interesse no Credenciamento - Paróquia Santa Maria Mãe de Deus" class="cta-button">Fale com a VPMA</a>
+        </div>
+
+        
+        <!-- Seção do Mapa -->
+        <div class="section map-section">
+            <h2>Nossa Localização</h2>
+            <p>Estamos no coração do Maguari, de portas abertas para acolher e servir.</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.819421598463!2d-48.378418!3d-1.349722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a461b0c037d283%3A0x8f5a6b09333f2c5f!2sPar%C3%B3quia%20Santa%20Maria%20M%C3%A3e%20de%20Deus!5e0!3m2!1spt-BR!2sbr!4v1678886474156!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p style="text-align:center; margin-top: 15px;"><strong>Endereço:</strong> Avenida Cláudio Saunders, nº 1670 - Maguari, Ananindeua - PA, CEP: 67030-390</p>
+        </div>
+    </div>
+
+</body>
+</html>
